@@ -1,0 +1,12 @@
+{
+    "dockerComposeFile": "docker-compose.yaml",
+    "service": "graphql",
+    "workspaceFolder": "/var/app",
+    "extensions": [
+        "ms-vscode.go",
+        "graphql.vscode-graphql",
+        "golang.go",
+        "github.copilot"
+    ],
+    "postStartCommand": "go mod tidy"
+}

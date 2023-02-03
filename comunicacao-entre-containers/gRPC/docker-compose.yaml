@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  ubuntu: 
+    build: 
+      context: .
+    container_name: ubuntu
+    volumes:
+      - ./:/var/app
+    tty: true
