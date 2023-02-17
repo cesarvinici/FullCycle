@@ -1,7 +1,7 @@
 import Address from "../../entity/address";
 import Customer from "../../entity/customer";
 import EventDispatcher from "../@shared/event-dispatcher";
-import CustomerChangedAddress from "./customer-created.event";
+import CustomerChangedAddressEvent from "./customer-changed-address.event";
 import EnviaConsoleLogAddressHandler from "./handler/enviaConsoleLogAddress.handler";
 
 describe("Customer Created Events Unit Tests", () => {
@@ -58,7 +58,7 @@ describe("Customer Created Events Unit Tests", () => {
         const address = new Address("Rua 1", 123, "São Paulo", "SP", "12345678");
         customer.changeAddress(address);
 
-        const customerChangedAddressEvent = new CustomerChangedAddress(customer);
+        const customerChangedAddressEvent = new CustomerChangedAddressEvent(customer);
         eventDispatcher.notify(customerChangedAddressEvent);
 
         expect(spyEventHandler).toBeCalledTimes(1);
