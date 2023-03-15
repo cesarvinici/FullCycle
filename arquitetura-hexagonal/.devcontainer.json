@@ -1,0 +1,14 @@
+{
+    "dockerComposeFile": "docker-compose.yaml",
+    "service": "app",
+    "workspaceFolder": "/go/src/",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.go",
+                "golang.go",
+                "github.copilot"
+            ]
+        }
+    }
+}
