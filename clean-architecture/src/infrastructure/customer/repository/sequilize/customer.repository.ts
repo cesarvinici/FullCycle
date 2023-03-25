@@ -23,7 +23,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
             rewardPoints: entity.rewardPoints,
         });
 
-        const customerCreatedEvent = new CustomerCreatedEvent(entity);
+        // const customerCreatedEvent = new CustomerCreatedEvent(entity);
 
     }
     async update(entity: Customer): Promise<void> {
