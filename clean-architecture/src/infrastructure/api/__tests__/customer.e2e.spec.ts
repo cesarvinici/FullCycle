@@ -85,7 +85,7 @@ describe("E2E test for Customer", () => {
 
         expect(response.status).toBe(500);
         expect(response.body).toEqual({
-            error: "Name is required"
+            error: "customer: Name is required"
         });
     });
 
