@@ -55,7 +55,7 @@ describe("E2E test for Product", () => {
 
         expect(response.status).toBe(500);
         expect(response.body).toEqual({
-            error: "Name is required"
+            error: "product: Name is required"
         });
     });
 
@@ -69,7 +69,7 @@ describe("E2E test for Product", () => {
 
         expect(response.status).toBe(500);
         expect(response.body).toEqual({
-            error: "Price must be greater than zero"
+            error: "product: Price must be greater than zero"
         });
     });
 
@@ -150,7 +150,7 @@ describe("E2E test for Product", () => {
 
         expect(response.status).toBe(500);
         expect(response.body).toEqual({
-            error: "Name is required"
+            error: "product: Name is required"
         });
     });
 
@@ -166,7 +166,7 @@ describe("E2E test for Product", () => {
 
         expect(response.status).toBe(500);
         expect(response.body).toEqual({
-            error: "Price must be greater than zero"
+            error: "product: Price must be greater than zero"
         });
     });
 });

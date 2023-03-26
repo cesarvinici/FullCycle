@@ -8,7 +8,7 @@ describe("Update Product Use Case unit tests", () => {
 
     let sequelize: Sequelize
 
-    beforeAll(async () => {
+    beforeEach(async () => {
         sequelize = new Sequelize({
             dialect: "sqlite",
             storage: ":memory:",
@@ -18,7 +18,7 @@ describe("Update Product Use Case unit tests", () => {
         await sequelize.sync();
     });
 
-    afterAll(async () => {
+    afterEach(async () => {
         await sequelize.close();
     });
 
@@ -49,25 +49,37 @@ describe("Update Product Use Case unit tests", () => {
         
         const input = {
             id: '1',
-            name: '',
+            name: 'Product 1',
             price: 10
         }
 
-        await expect(useCase.execute(input)).rejects.toThrow("Name is required");
+        const product = new Product(input.id, input.name, input.price);
+        await productRepository.create(product);
+
+
+        input.name = '';
+
+        await expect(useCase.execute(input)).rejects.toThrow("product: Name is required");
     
     });
 
     it("Should throw and error if invalid price is provided", async () => {
+
         const productRepository = new ProductRepository();
         const useCase = new UpdateProductUseCase(productRepository);
         
         const input = {
             id: '1',
             name: 'Product 1',
-            price: -1
+            price: 10
         }
+        
+        const product = new Product(input.id, input.name, input.price);
+        await productRepository.create(product);
+        
+        input.price = -1;
 
-        await expect(useCase.execute(input)).rejects.toThrow("Price must be greater than zero");
+        await expect(useCase.execute(input)).rejects.toThrow("product: Price must be greater than zero");
     });
 
 });
