@@ -123,6 +123,40 @@ describe("E2E test for Customer", () => {
                 }
             ]
         })
+
+
+        const responseXml = await request(app)
+        .get("/customer")
+        .set("Accept", "application/xml")
+        .send();
+
+        expect(responseXml.status).toBe(200);
+        expect(responseXml.text).toContain(`<?xml version="1.0" encoding="UTF-8"?>`)
+        expect(responseXml.text).toContain(`<customers>`)
+        expect(responseXml.text).toContain(`<customer>`)
+        expect(responseXml.text).toContain(`<id>${response.body.customers[0].id}</id>`)
+        expect(responseXml.text).toContain(`<name>John</name>`)
+        expect(responseXml.text).toContain(`<address>`)
+        expect(responseXml.text).toContain(`<street>Main Street</street>`)
+        expect(responseXml.text).toContain(`<number>123</number>`)
+        expect(responseXml.text).toContain(`<city>New York</city>`)
+        expect(responseXml.text).toContain(`<state>NY</state>`)
+        expect(responseXml.text).toContain(`<zip>10001</zip>`)
+        expect(responseXml.text).toContain(`</address>`)
+        expect(responseXml.text).toContain(`</customer>`)
+        expect(responseXml.text).toContain(`<customer>`)
+        expect(responseXml.text).toContain(`<name>Mary</name>`)
+        expect(responseXml.text).toContain(`<id>${response.body.customers[1].id}</id>`)
+        expect(responseXml.text).toContain(`<address>`)
+        expect(responseXml.text).toContain(`<street>Main Street</street>`)
+        expect(responseXml.text).toContain(`<number>123</number>`)
+        expect(responseXml.text).toContain(`<city>New York</city>`)
+        expect(responseXml.text).toContain(`<state>NY</state>`)
+        expect(responseXml.text).toContain(`<zip>10001</zip>`)
+        expect(responseXml.text).toContain(`</address>`)
+        expect(responseXml.text).toContain(`</customer>`)
+        expect(responseXml.text).toContain(`</customers>`)
+
     });
 
     it("Should find a customer", async () => {

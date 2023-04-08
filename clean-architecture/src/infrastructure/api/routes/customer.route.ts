@@ -4,6 +4,7 @@ import FindCustomerUseCase from '../../../usecase/customer/find/find.customer.us
 import ListCustomerUseCase from '../../../usecase/customer/list/list.customer.usercase';
 import UpdateCustomerUseCase from '../../../usecase/customer/update/update.customer.usercase';
 import CustomerRepository from '../../customer/repository/sequilize/customer.repository';
+import CustomerPresenter from '../presenters/customer.presenter';
 
 export const customerRoute = express.Router();
 
@@ -33,7 +34,13 @@ customerRoute.get('/', async (req: Request, res: Response) => {
 
     try {
         const customers = await useCase.execute({});
-        res.status(200).json(customers);
+
+
+        res.format({
+            json: async () => res.send(customers),
+            xml: async () => res.send(CustomerPresenter.toXml(customers)),
+        });
+
     } catch (error: any) {
         res.status(500).json({ error: error.message });
     }
