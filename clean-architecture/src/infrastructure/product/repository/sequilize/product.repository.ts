@@ -27,7 +27,7 @@ export default class ProductRepository implements ProductRepositoryInterface {
         if (! productModel) {
             throw new Error("Product not found");
         }
-
+        
         return new Product(productModel.id, productModel.name, productModel.price);
     }
 

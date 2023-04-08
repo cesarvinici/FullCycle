@@ -5,7 +5,6 @@ import ProductRepository from "../../../infrastructure/product/repository/sequil
 import UpdateProductUseCase from "./update.product.usecase";
 
 describe("Update Product Use Case unit tests", () => {
-
     let sequelize: Sequelize
 
     beforeEach(async () => {
@@ -43,28 +42,8 @@ describe("Update Product Use Case unit tests", () => {
         expect(output).toEqual(input)
     });
 
-    it("Should throw and error if invalid name is provided", async () => {
-        const productRepository = new ProductRepository();
-        const useCase = new UpdateProductUseCase(productRepository);
-        
-        const input = {
-            id: '1',
-            name: 'Product 1',
-            price: 10
-        }
 
-        const product = new Product(input.id, input.name, input.price);
-        await productRepository.create(product);
-
-
-        input.name = '';
-
-        await expect(useCase.execute(input)).rejects.toThrow("product: Name is required");
-    
-    });
-
-    it("Should throw and error if invalid price is provided", async () => {
-
+    it("should throw an error if invalid price is provided", async () => {
         const productRepository = new ProductRepository();
         const useCase = new UpdateProductUseCase(productRepository);
         
@@ -82,4 +61,21 @@ describe("Update Product Use Case unit tests", () => {
         await expect(useCase.execute(input)).rejects.toThrow("product: Price must be greater than zero");
     });
 
+    it("should throw an error if invalid name is provided", async () => {
+        const productRepository = new ProductRepository();
+        const useCase = new UpdateProductUseCase(productRepository);
+        
+        const input = {
+            id: '1',
+            name: 'Product 1',
+            price: 10
+        }
+
+        const product = new Product(input.id, input.name, input.price);
+        await productRepository.create(product);
+
+        input.name = '';
+
+        await expect(useCase.execute(input)).rejects.toThrow("product: Name is required");
+    });
 });
