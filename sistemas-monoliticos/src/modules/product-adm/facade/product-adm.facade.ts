@@ -1,5 +1,4 @@
 import UseCaseInterface from "../../@shared/usecase/use-case.interface";
-import Product from "../domain/product.entity";
 import ProductAdmFacadeInterface, { AddProductFacadeInputDto, CheckStockFacadeInputDto, CheckStockFacadeOutputDto } from "./product-adm.facade.interface";
 
 
