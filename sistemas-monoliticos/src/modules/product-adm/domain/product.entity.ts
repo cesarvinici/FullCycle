@@ -37,6 +37,10 @@ export default class Product extends BaseEntity implements AggregateRoot {
         return this._purchasePrice;
     }
 
+    get salesPrice(): number {
+        return this._purchasePrice * 1.2;
+    }
+
     get stock(): number {
         return this._stock;
     }
@@ -51,5 +55,5 @@ export default class Product extends BaseEntity implements AggregateRoot {
 
     set purchasePrice(purchasePrice: number) {
         this._purchasePrice = purchasePrice;
-    }
+    }    
 }
