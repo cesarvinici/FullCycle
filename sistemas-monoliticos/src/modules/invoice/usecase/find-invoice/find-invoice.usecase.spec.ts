@@ -64,12 +64,12 @@ describe("Find Invoice usecase Tests", () => {
         expect(result.items[0]).toEqual({
             id: expectedInvoice.items[0].id.id,
             name: expectedInvoice.items[0].name,
-            price: expectedInvoice.items[0].price
+            price: expectedInvoice.items[0].salesPrice
         });
         expect(result.items[1]).toEqual({
             id: expectedInvoice.items[1].id.id,
             name: expectedInvoice.items[1].name,
-            price: expectedInvoice.items[1].price
+            price: expectedInvoice.items[1].salesPrice
         });
         expect(result.total).toBe(expectedInvoice.total);
         expect(result.createdAt).toBe(expectedInvoice.createdAt);

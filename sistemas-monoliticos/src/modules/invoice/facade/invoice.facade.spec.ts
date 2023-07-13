@@ -1,7 +1,7 @@
 
 import { Sequelize } from "sequelize-typescript";
 import InoviceModel from "../repository/invoice.model";
-import Product from "../../product/domain/product.entity";
+import Product from "../../product-adm/domain/product-adm.entity";
 import InvoiceRepository from "../repository/invoice.repository";
 import GenerateInvoiceUseCase from "../usecase/generate-invoice/generate-invoice.usecase";
 import InvoiceFacade from "./invoice.facade";
@@ -44,12 +44,16 @@ describe("Invoice Facade Tests", () => {
             new Product({
                 id: new Id("1"),
                 name: "Product 1",
-                price: 10,
+                description: "Product 1",
+                purchasePrice: 10,
+                stock: 10
             }),
             new Product({
                 id: new Id("2"),
                 name: "Product 2",
-                price: 20
+                description: "Product 2",
+                purchasePrice: 20,
+                stock: 10
             })
         ]
 
@@ -83,10 +87,12 @@ describe("Invoice Facade Tests", () => {
         expect(invoice.address.zip).toBe("12345678");
         expect(invoice.items.length).toBe(2);
         expect(invoice.items[0].name).toBe("Product 1");
-        expect(invoice.items[0].price).toBe(10);
+        expect(invoice.items[0].description).toBe("Product 1");
+        expect(invoice.items[0].purchasePrice).toBe(10);
         expect(invoice.items[1].name).toBe("Product 2");
-        expect(invoice.items[1].price).toBe(20);
-        expect(invoice.total).toBe(30);
+        expect(invoice.items[1].description).toBe("Product 2");
+        expect(invoice.items[1].purchasePrice).toBe(20);
+        expect(invoice.total).toBe(36);
     });
 
     it("Should Find an Invoice", async () => {
@@ -103,12 +109,16 @@ describe("Invoice Facade Tests", () => {
             new Product({
                 id: new Id("1"),
                 name: "Product 1",
-                price: 10
+                description: "Product 1",
+                purchasePrice: 10,
+                stock: 10
             }),
             new Product({
                 id: new Id("2"),
                 name: "Product 2",
-                price: 20
+                description: "Product 2",
+                purchasePrice: 20,
+                stock: 10
             })
         ]
 
@@ -145,13 +155,13 @@ describe("Invoice Facade Tests", () => {
         expect(result.items[0]).toEqual({
             id: "1",
             name: "Product 1",
-            price: 10,
+            price: 12,
         });
 
         expect(result.items[1]).toEqual({
             id: "2",
             name: "Product 2",
-            price: 20,
+            price: 24,
         });
 
     });

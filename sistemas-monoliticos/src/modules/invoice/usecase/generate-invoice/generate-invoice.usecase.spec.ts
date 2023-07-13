@@ -1,4 +1,4 @@
-import Product from "../../../product/domain/product.entity";
+import Product from "../../../product-adm/domain/product-adm.entity";
 import GenerateInvoiceUseCase from "./generate-invoice.usecase";
 
 const MockInvoiceRepository = () => ({
@@ -14,11 +14,15 @@ describe('Generate Invoice usecase Tests', () => {
         const items = [
             new Product({
                 name: "Product 1",
-                price: 10,
+                description: "Product 1",
+                purchasePrice: 10,
+                stock: 10
             }),
             new Product({
                 name: "Product 2",
-                price: 20,
+                description: "Product 2",
+                purchasePrice: 20,
+                stock: 10
             })
         ]
 
@@ -52,13 +56,13 @@ describe('Generate Invoice usecase Tests', () => {
         expect(result.items[0]).toEqual({
             id: items[0].id.id,
             name: items[0].name,
-            price: items[0].price
+            price: items[0].salesPrice
         });
         expect(result.items[1]).toEqual({
             id: items[1].id.id,
             name: items[1].name,
-            price: items[1].price
+            price: items[1].salesPrice
         });
-        expect(result.total).toBe(30);    
+        expect(result.total).toBe(36);    
     });
 });

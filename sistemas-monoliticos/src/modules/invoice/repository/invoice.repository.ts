@@ -1,5 +1,5 @@
 import Id from "../../@shared/domain/value-object/id.value-object";
-import Product from "../../product/domain/product.entity";
+import Product from "../../product-adm/domain/product-adm.entity";
 import Invoice from "../domain/invoice.entity";
 import InvoiceGateway from "../gateway/invoice.gateway";
 import Address from "../value-object/address";
@@ -38,7 +38,9 @@ export default class InvoiceRepository implements InvoiceGateway {
             return new Product({
                 id: new Id(item._id._id),
                 name: item._name,
-                price: item._price,
+                description: item._description,
+                purchasePrice: item._purchasePrice,
+                stock: item._stock
             })
         });
 

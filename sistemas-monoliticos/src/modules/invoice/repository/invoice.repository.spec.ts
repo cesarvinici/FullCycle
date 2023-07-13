@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import InoviceModel from "./invoice.model";
-import Product from "../../product/domain/product.entity";
+import Product from "../../product-adm/domain/product-adm.entity";
 import Invoice from "../domain/invoice.entity";
 import Id from "../../@shared/domain/value-object/id.value-object";
 import Address from "../value-object/address";
@@ -32,11 +32,15 @@ describe("Invoice Repository Tests", () => {
         const items = [
             new Product({
                 name: "Product 1",
-                price: 10,
+                description: "Product 1",
+                purchasePrice: 10,
+                stock: 10
             }),
             new Product({
                 name: "Product 2",
-                price: 20,
+                description: "Product 2",
+                purchasePrice: 20,
+                stock: 10
             })
         ]
 
@@ -66,7 +70,7 @@ describe("Invoice Repository Tests", () => {
         expect(invoiceGenerated.city).toEqual(invoice.address.city);
         expect(invoiceGenerated.state).toEqual(invoice.address.state);
         expect(invoiceGenerated.zipCode).toEqual(invoice.address.zip);
-        expect(invoiceGenerated.total).toEqual(30);
+        expect(invoiceGenerated.total).toEqual(36);
         expect(invoiceGenerated.items).toEqual(JSON.stringify(invoice.items));
     });
 
@@ -78,11 +82,15 @@ describe("Invoice Repository Tests", () => {
             const items = [
                 new Product({
                     name: "Product 1",
-                    price: 10,
+                    description: "Product 1",
+                    purchasePrice: 10,
+                    stock: 10
                 }),
                 new Product({
                     name: "Product 2",
-                    price: 20,
+                    description: "Product 2",
+                    purchasePrice: 20,
+                    stock: 10
                 })
             ]
     
@@ -123,11 +131,15 @@ describe("Invoice Repository Tests", () => {
             expect(invoiceGenerated.address.state).toEqual(invoice.address.state);
             expect(invoiceGenerated.address.zip).toEqual(invoice.address.zip);
             expect(invoiceGenerated.items[0].name).toEqual(invoice.items[0].name);
-            expect(invoiceGenerated.items[0].price).toEqual(invoice.items[0].price);
+            expect(invoiceGenerated.items[0].description).toEqual(invoice.items[0].description);
+            expect(invoiceGenerated.items[0].salesPrice).toEqual(invoice.items[0].salesPrice);
+            expect(invoiceGenerated.items[0].stock).toEqual(invoice.items[0].stock);
             
             expect(invoiceGenerated.items[1].name).toEqual(invoice.items[1].name);
-            expect(invoiceGenerated.items[1].price).toEqual(invoice.items[1].price);
-            expect(invoiceGenerated.total).toEqual(30);
+            expect(invoiceGenerated.items[1].description).toEqual(invoice.items[1].description);
+            expect(invoiceGenerated.items[1].salesPrice).toEqual(invoice.items[1].salesPrice);
+            expect(invoiceGenerated.items[1].stock).toEqual(invoice.items[1].stock);
+            expect(invoiceGenerated.total).toEqual(36);
     });
 
 

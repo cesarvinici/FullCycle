@@ -47,7 +47,7 @@ export default class GenerateInvoiceUseCase implements UseCaseInterface {
             items: invoice.items.map(item => ({
                 id: item.id.id,
                 name: item.name,
-                price: item.price
+                price: item.salesPrice
             })),
             total: invoice.total
         }

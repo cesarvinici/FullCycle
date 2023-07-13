@@ -1,4 +1,4 @@
-import Product from "../../product/domain/product.entity";
+import Product from "../../product-adm/domain/product-adm.entity";
 import Address from "../value-object/address";
 import Invoice from "./invoice.entity";
 
@@ -18,11 +18,15 @@ describe("Invoice Test", () => {
         const items = [
                 new Product({
                     name: "Product 1",
-                    price: 10
+                    description: "Product 1",
+                    purchasePrice: 10,
+                    stock: 10
                 }),
                 new Product({
                     name: "Product 2",
-                    price: 20
+                    description: "Product 2",
+                    purchasePrice: 20,
+                    stock: 10
                 })
             
         ]
@@ -34,7 +38,7 @@ describe("Invoice Test", () => {
                 items: items
             })
 
-            expect(invoice.total).toBe(30)
+            expect(invoice.total).toBe(36)
     })
 
 
