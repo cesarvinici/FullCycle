@@ -1,4 +1,4 @@
-import Product from "../../product-adm/domain/product-adm.entity";
+import Product from "../../product-adm/domain/product.entity";
 import Address from "../value-object/address";
 import Invoice from "./invoice.entity";
 

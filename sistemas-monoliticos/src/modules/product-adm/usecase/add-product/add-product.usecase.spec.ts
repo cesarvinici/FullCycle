@@ -1,4 +1,4 @@
-import AddProductUseCase from "./add-product-adm.usecase";
+import AddProductUseCase from "./add-product.usecase";
 
 const mockProductRepository = () => ({
     add: jest.fn(),

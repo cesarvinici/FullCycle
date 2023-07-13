@@ -1,7 +1,7 @@
 import AggregateRoot from "../../@shared/domain/entity/aggregate-root.interface";
 import BaseEntity from "../../@shared/domain/entity/base.entity";
 import Id from "../../@shared/domain/value-object/id.value-object";
-import Product from "../../product-adm/domain/product-adm.entity";
+import Product from "../../product-adm/domain/product.entity";
 import Address from "../value-object/address";
 
 

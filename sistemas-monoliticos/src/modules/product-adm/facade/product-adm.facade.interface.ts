@@ -1,4 +1,4 @@
-export interface AddProductAdmFacadeInputDto {
+export interface AddProductFacadeInputDto {
     id?: string
     name: string
     description: string
@@ -18,7 +18,7 @@ export interface CheckStockFacadeOutputDto {
 
 export default interface ProductAdmFacadeInterface {
 
-    addProduct(input: AddProductAdmFacadeInputDto): Promise<void>
+    addProduct(input: AddProductFacadeInputDto): Promise<void>
     checkStock(input: CheckStockFacadeInputDto): Promise<CheckStockFacadeOutputDto>
 
 }
