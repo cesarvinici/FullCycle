@@ -30,7 +30,7 @@ export default class FindInvoiceUseCase implements UseCaseInterface {
             items: invoice.items.map(item => ({
                 id: item.id.id,
                 name: item.name,
-                price: item.salesPrice
+                price: item.price
             })),
             total: invoice.total,
             createdAt: invoice.createdAt,
