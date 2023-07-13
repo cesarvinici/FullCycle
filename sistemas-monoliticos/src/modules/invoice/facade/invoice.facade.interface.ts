@@ -1,4 +1,4 @@
-import Product from "../../product-adm/domain/product-adm.entity";
+import Product from "../../product/domain/product.entity";
 
 export interface GenerateInvoiceFacadeInputDTO {
     id?: string;
