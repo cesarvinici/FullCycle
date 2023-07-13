@@ -1,13 +1,12 @@
 import Id from "../../@shared/domain/value-object/id.value-object";
-import Product from "../domain/product.entity";
-import ProductGateway from "../gateway/product.gateway";
-import { AddProductOutputDto } from "../usecase/add-product/add-product.dto";
-import { ProductModel } from "./product.model";
+import ProductAdm from "../domain/product-adm.entity";
+import ProductAdmGateway from "../gateway/product-adm.gateway";
+import { ProductAdmModel } from "./product-adm.model";
 
-export default class ProductRepository implements ProductGateway {
+export default class ProductRepository implements ProductAdmGateway {
 
-    async add(product: Product): Promise<void> {
-        await ProductModel.create({
+    async add(product: ProductAdm): Promise<void> {
+        await ProductAdmModel.create({
             id: product.id.id,
             name: product.name,
             description: product.description,
@@ -18,9 +17,9 @@ export default class ProductRepository implements ProductGateway {
         });
     }
 
-    async find(id: string): Promise<Product> {
+    async find(id: string): Promise<ProductAdm> {
        
-        const product = await ProductModel.findOne(
+        const product = await ProductAdmModel.findOne(
             { where: { id: id }
         });
 
@@ -28,7 +27,7 @@ export default class ProductRepository implements ProductGateway {
             throw new Error("Product not found");
         }
 
-        return new Product({
+        return new ProductAdm({
             id: new Id(product.id),
             name: product.name,
             description: product.description,

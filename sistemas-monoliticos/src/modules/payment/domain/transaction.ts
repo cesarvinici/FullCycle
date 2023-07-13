@@ -60,6 +60,4 @@ export default class Transaction extends BaseEntity  implements AggregateRoot {
 
         this.decline();
     }
-
-
 }

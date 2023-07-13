@@ -1,13 +1,13 @@
 import Id from "../../../@shared/domain/value-object/id.value-object";
-import Product from "../../domain/product.entity";
-import ProductGateway from "../../gateway/product.gateway";
+import ProductAdm from "../../domain/product.entity";
+import ProductAdmGateway from "../../gateway/product.gateway";
 import { AddProductInputDto, AddProductOutputDto } from "./add-product.dto";
 
 export default class AddProductUseCase {
 
-    private _productRepository: ProductGateway;
+    private _productRepository: ProductAdmGateway;
     
-    constructor(_productRepository: ProductGateway) {
+    constructor(_productRepository: ProductAdmGateway) {
         this._productRepository = _productRepository;
     }
 
@@ -17,12 +17,10 @@ export default class AddProductUseCase {
         const props = {
             id: new Id(input.id),
             name: input.name,
-            description: input.description,
-            purchasePrice: input.purchasePrice,
-            stock: input.stock
+            price: input.price
         }
 
-        const product = new Product(props);
+        const product = new ProductAdm(props);
 
         // Adicionar esse cara / banco, api, arquivo txt
         this._productRepository.add(product);
@@ -30,9 +28,7 @@ export default class AddProductUseCase {
         return {
             id: product.id.id,
             name: product.name,
-            description: product.description,
-            purchasePrice: product.purchasePrice,
-            stock: product.stock,
+            price: product.price,
             createdAt: product.createdAt,
             updatedAt: product.updatedAt
         }

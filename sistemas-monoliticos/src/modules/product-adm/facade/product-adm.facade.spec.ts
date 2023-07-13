@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
-import { ProductModel } from "../repository/product.model";
+import { ProductAdmModel } from "../repository/product-adm.model";
 import ProductAdmFacadeFactory from "../factory/facade.factory";
 
 describe("ProductAdmFacade test", () => {
@@ -14,7 +14,7 @@ describe("ProductAdmFacade test", () => {
             sync: { force: true }
         });
         
-        sequelize.addModels([ProductModel])
+        sequelize.addModels([ProductAdmModel])
 
         await sequelize.sync();
     });
@@ -37,7 +37,7 @@ describe("ProductAdmFacade test", () => {
 
         await productFacade.addProduct(input);
 
-        const product = await ProductModel.findOne({ where: { id: input.id } });
+        const product = await ProductAdmModel.findOne({ where: { id: input.id } });
 
         expect(product).not.toBeNull();
         expect(product.id).toBe(input.id);
@@ -50,7 +50,7 @@ describe("ProductAdmFacade test", () => {
 
         const productFacade = ProductAdmFacadeFactory.create();
 
-        ProductModel.create({
+        ProductAdmModel.create({
             id: "1",
             name: "Product 1",
             description: "Product 1 description",

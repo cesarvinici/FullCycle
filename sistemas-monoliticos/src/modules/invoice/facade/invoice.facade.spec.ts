@@ -1,7 +1,7 @@
 
 import { Sequelize } from "sequelize-typescript";
 import InoviceModel from "../repository/invoice.model";
-import Product from "../../product-adm/domain/product.entity";
+import Product from "../../product-adm/domain/product-adm.entity";
 import InvoiceRepository from "../repository/invoice.repository";
 import GenerateInvoiceUseCase from "../usecase/generate-invoice/generate-invoice.usecase";
 import InvoiceFacade from "./invoice.facade";

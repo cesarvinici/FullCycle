@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize-typescript";
-import ProductAdm from "../domain/product-adm.entity";
 import Id from "../../@shared/domain/value-object/id.value-object";
 import ProductRepository from "./product.repository";
-import { ProductAdmModel } from "./product-adm.model";
+import { ProductModel } from "./product.model";
+import Product from "../domain/product.entity";
 
 describe("Product Repository tests", () => {
 
@@ -16,7 +16,7 @@ describe("Product Repository tests", () => {
             sync: { force: true }
         });
         
-        sequelize.addModels([ProductAdmModel])
+        sequelize.addModels([ProductModel])
 
         await sequelize.sync();
     });
@@ -31,36 +31,30 @@ describe("Product Repository tests", () => {
         const productProps = {
             id: new Id("1"),
             name: "Product 1",
-            description: "Product 1 description",
-            purchasePrice: 10,
-            stock: 10,
+            price: 10,
         }
-        const product = new ProductAdm(productProps)
+        const product = new Product(productProps)
 
         const productRepository = new ProductRepository();
 
         await productRepository.add(product);
 
-        const productDb = await ProductAdmModel.findOne(
+        const productDb = await ProductModel.findOne(
             { where: { id: productProps.id.id } 
         });
 
         expect(productDb.id).toEqual(productProps.id.id);
         expect(productDb.name).toEqual(productProps.name);
-        expect(productDb.description).toEqual(productProps.description);
-        expect(productDb.purchasePrice).toEqual(productProps.purchasePrice);
-        expect(productDb.stock).toEqual(productProps.stock);
+        expect(productDb.price).toEqual(productProps.price);
     });
 
 
     it("Should find a product", async () => {
         const productRepository = new ProductRepository();
-        ProductAdmModel.create({
+        ProductModel.create({
             id: "1",
             name: "Product 1",
-            description: "Product 1 description",
-            purchasePrice: 10,
-            stock: 10,
+            price: 10,
             createdAt: new Date(),
             updatedAt: new Date(),
         });
@@ -69,8 +63,6 @@ describe("Product Repository tests", () => {
 
         expect(product.id.id).toEqual("1");
         expect(product.name).toEqual("Product 1");
-        expect(product.description).toEqual("Product 1 description");
-        expect(product.purchasePrice).toEqual(10);
-        expect(product.stock).toEqual(10);
+        expect(product.price).toEqual(10);
     });
 });

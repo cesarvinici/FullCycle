@@ -14,20 +14,11 @@ export class ProductModel extends Model {
     name: string;
 
     @Column({allowNull: false})
-    description: string;
-    
-    @Column({allowNull: false})
-    purchasePrice: number;
-
-    @Column({allowNull: false})
-    stock: number;
+    price: number;
 
     @Column({allowNull: false})
     createdAt: Date;
 
     @Column({allowNull: false})
     updatedAt: Date;
-
-    
-
 }

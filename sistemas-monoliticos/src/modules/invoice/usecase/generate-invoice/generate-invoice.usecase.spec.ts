@@ -1,4 +1,4 @@
-import Product from "../../../product-adm/domain/product.entity";
+import Product from "../../../product-adm/domain/product-adm.entity";
 import GenerateInvoiceUseCase from "./generate-invoice.usecase";
 
 const MockInvoiceRepository = () => ({
