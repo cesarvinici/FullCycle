@@ -7,7 +7,13 @@ const client = new Client({
     id: new Id("123"),
     name: "John Doe",
     email: "john@email.com",
-    address: "John's street, 123"
+    document: "12345678900",
+    street: "John Doe Street",
+    number: "123",
+    complement: "Near the river",
+    city: "John Doe City",
+    state: "John Doe State",
+    zipCode: "12345678"
 })
 
 const mockRepository = () => ({
@@ -32,7 +38,13 @@ describe("Find Client Usecase", () => {
             id: client.id.id,
             name: client.name,
             email: client.email,
-            address: client.address,
+            document: client.document,
+            street: client.street,
+            number: client.number,
+            complement: client.complement,
+            city: client.city,
+            state: client.state,
+            zipCode: client.zipCode,
             created_at: client.createdAt,
             updated_at: client.updatedAt
         })

@@ -1,6 +1,5 @@
 import Product from "../../domain/Product.entity";
 
-
 export interface GenerateInvoiceInputDto {
     id?: string;
     name: string;

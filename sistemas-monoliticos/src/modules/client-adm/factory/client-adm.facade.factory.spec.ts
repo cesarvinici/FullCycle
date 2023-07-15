@@ -29,7 +29,13 @@ describe("Client ADM facade factory test", () => {
             id: "1",
             name: "John Doe",
             email: "example@email.com",
-            address: "John Doe Street"
+            document: "123456789",
+            street: "John Doe Street",
+            number: "123",
+            complement: "ap 123",
+            city: "John Doe City",
+            state: "John Doe State",
+            zipCode: "12345678",
         }
 
         await facede.addClient(input);
@@ -40,7 +46,7 @@ describe("Client ADM facade factory test", () => {
         expect(client.id).toBe("1");
         expect(client.name).toBe("John Doe");
         expect(client.email).toBe(input.email);
-        expect(client.address).toBe(input.address);
+        expect(client.street).toBe(input.street);
 
     });
 
@@ -52,7 +58,13 @@ describe("Client ADM facade factory test", () => {
             id: "1",
             name: "John Doe",
             email: "example@email.com",
-            address: "John Doe Street",
+            document: "123456789",
+            street: "John Doe Street",
+            number: "123",
+            complement: "ap 123",
+            city: "John Doe City",
+            state: "John Doe State",
+            zipCode: "12345678",
             created_at: new Date(),
             updated_at: new Date()
         }
@@ -65,6 +77,6 @@ describe("Client ADM facade factory test", () => {
         expect(client.id).toBe("1");
         expect(client.name).toBe("John Doe");
         expect(client.email).toBe(input.email);
-        expect(client.address).toBe(input.address);
+        expect(client.street).toBe(input.street);
     });
 });

@@ -10,7 +10,13 @@ export default class ClientRepository implements ClientAdmGateway {
             id: client.id.id,
             name: client.name,
             email: client.email,
-            address: client.address,
+            document: client.document,
+            street: client.street,
+            number: client.number,
+            complement: client.complement,
+            city: client.city,
+            state: client.state,
+            zipCode: client.zipCode,
             created_at: client.createdAt,
             updated_at: client.updatedAt
         });
@@ -32,7 +38,13 @@ export default class ClientRepository implements ClientAdmGateway {
             id: new Id(client.id),
             name: client.name,
             email: client.email,
-            address: client.address,
+            document: client.document,
+            street: client.street,
+            number: client.number,
+            complement: client.complement,
+            city: client.city,
+            state: client.state,
+            zipCode: client.zipCode,
             created_at: client.created_at,
             updated_at: client.updated_at
         });

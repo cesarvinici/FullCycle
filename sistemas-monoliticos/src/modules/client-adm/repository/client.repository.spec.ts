@@ -27,7 +27,13 @@ describe("Client repository tests", () => {
             id: "1",
             name: "John Doe",
             email: "john@email.com",
-            address: "John's street, 123",
+            document: "123456789",
+            street: "John Doe Street",
+            number: "123",
+            complement: "ap 123",
+            city: "John Doe City",
+            state: "John Doe State",
+            zipCode: "12345678",
             created_at: new Date(),
             updated_at: new Date()
         });
@@ -40,7 +46,8 @@ describe("Client repository tests", () => {
         expect(client.id.id).toBe("1");
         expect(client.name).toBe("John Doe");
         expect(client.email).toBe("john@email.com");
-        expect(client.address).toBe("John's street, 123");
+        expect(client.document).toBe("123456789");
+        expect(client.street).toBe("John Doe Street");
         expect(client.createdAt).toBeInstanceOf(Date);
         expect(client.updatedAt).toBeInstanceOf(Date);
         
@@ -54,7 +61,13 @@ describe("Client repository tests", () => {
         const client = new Client({
             name: "John Doe",
             email: "john@email.com",
-            address: "John's street, 123"
+            document: "123456789",
+            street: "John Doe Street",
+            number: "123",
+            complement: "ap 123",
+            city: "John Doe City",
+            state: "John Doe State",
+            zipCode: "12345678",
         });
 
 
@@ -69,7 +82,7 @@ describe("Client repository tests", () => {
         expect(clientModel.id).toBe(client.id.id);
         expect(clientModel.name).toBe(client.name);
         expect(clientModel.email).toBe(client.email);
-        expect(clientModel.address).toBe(client.address);
+        expect(clientModel.street).toBe(client.street);
         expect(clientModel.created_at).toStrictEqual(client.createdAt);
         expect(clientModel.updated_at).toStrictEqual(client.updatedAt);
     });
