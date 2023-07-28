@@ -37,6 +37,11 @@ class Category
         $this->validate();
     }
 
+    public function getId(): string
+    {
+        return $this->id->toString();
+    }
+
     public function activate(): void
     {
         $this->isActive = true;
@@ -56,7 +61,7 @@ class Category
         $this->validate();
     }
 
-    public function validate()
+    private function validate()
     {
        DomainValidation::strMinLength($this->name, 3, "Name should not be less than 3");
        DomainValidation::strMaxLength($this->name, 255, "Name should not be greater than 255");
