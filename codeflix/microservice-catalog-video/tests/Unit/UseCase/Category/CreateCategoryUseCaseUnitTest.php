@@ -22,7 +22,7 @@ class CreateCategoryUseCaseUnitTest extends TestCase
         $isValid = true;
 
         $mockCategory = Mockery::mock(Category::class, [$uuid, $categoryName, $description, $isValid]);
-        $mockCategory->shouldReceive("getId")->andReturn($uuid);
+        $mockCategory->shouldReceive("id")->andReturn($uuid);
 
         $mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
         $mockRepository->shouldReceive('insert')->once()->andReturn($mockCategory);

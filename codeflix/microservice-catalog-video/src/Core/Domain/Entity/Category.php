@@ -37,11 +37,6 @@ class Category
         $this->validate();
     }
 
-    public function getId(): string
-    {
-        return $this->id->toString();
-    }
-
     public function activate(): void
     {
         $this->isActive = true;
