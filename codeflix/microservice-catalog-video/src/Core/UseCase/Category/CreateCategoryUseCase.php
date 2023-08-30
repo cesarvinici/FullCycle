@@ -4,8 +4,8 @@ namespace Core\UseCase\Category;
 
 use App\Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\Domain\Entity\Category;
-use Core\UseCase\Category\DTO\InsertCategoryInputDto;
-use Core\UseCase\Category\DTO\InsertCategoryOutputDto;
+use Core\UseCase\Category\DTO\Insert\InsertCategoryInputDto;
+use Core\UseCase\Category\DTO\Insert\InsertCategoryOutputDto;
 use Unit\UseCase\UseCaseInterface;
 
 class CreateCategoryUseCase

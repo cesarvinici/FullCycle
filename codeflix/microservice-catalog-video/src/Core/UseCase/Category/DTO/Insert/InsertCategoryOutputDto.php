@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\UseCase\Category\DTO;
+namespace Core\UseCase\Category\DTO\Insert;
 
 class InsertCategoryOutputDto
 {
