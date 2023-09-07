@@ -57,5 +57,11 @@ class UpdateCategoryUseCaseUnitTest extends TestCase
         $this->assertEquals($editedIsValid, $response->is_active);
     }
 
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        Mockery::close();
+    }
+
 
 }
