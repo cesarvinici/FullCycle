@@ -9,6 +9,7 @@ class InsertCategoryOutputDto
         public $name,
         public string $description = "",
         public bool $is_active = true,
+        public string $created_at = "",
     ) { }
 
 
