@@ -3,36 +3,18 @@
 namespace App\Repositories\Presenters;
 
 use Core\Domain\Repository\PaginationInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PaginationPresenter implements PaginationInterface
 {
-    private array $items;
-    private int $total;
-    private int $currentPage;
-    private int $perPage;
-    private int $lastPage;
-    private int $firstPage;
-    private int $from;
-    private int $to;
+    private LengthAwarePaginator $paginator;
 
-    public function __construct(
-        array $items,
-        int $total,
-        int $currentPage,
-        int $perPage,
-        int $lastPage,
-        int $firstPage,
-        int $from,
-        int $to
-    ) {
-        $this->items = $items;
-        $this->total = $total;
-        $this->currentPage = $currentPage;
-        $this->perPage = $perPage;
-        $this->lastPage = $lastPage;
-        $this->firstPage = $firstPage;
-        $this->from = $from;
-        $this->to = $to;
+    protected array $items = [];
+
+    public function __construct(LengthAwarePaginator $paginator)
+    {
+        $this->paginator = $paginator;
+        $this->items = $this->resolveItems($this->paginator->items());
     }
 
     public function items(): array
@@ -42,36 +24,47 @@ class PaginationPresenter implements PaginationInterface
 
     public function total(): int
     {
-        return $this->total;
+        return $this->paginator->total();
     }
 
     public function currentPage(): int
     {
-        return $this->currentPage;
+        return $this->paginator->currentPage();
     }
 
     public function firstPage(): int
     {
-        return $this->firstPage;
+        return 1;
     }
 
     public function lastPage(): int
     {
-        return $this->lastPage;
+        return $this->paginator->lastPage();
     }
 
     public function perPage(): int
     {
-        return $this->perPage;
+        return $this->paginator->perPage();
     }
 
     public function to(): int
     {
-        return $this->to;
+        return (int) $this->paginator->firstItem();
     }
 
     public function from(): int
     {
-        return $this->from;
+        return (int) $this->paginator->lastItem();
+    }
+
+    private function resolveItems(array $items)
+    {
+        $response = [];
+
+        foreach ($items as $item) {
+            $response[] = (object) $item->toArray();
+        }
+
+        return $response;
     }
 }

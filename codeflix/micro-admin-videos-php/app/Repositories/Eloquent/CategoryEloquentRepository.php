@@ -3,17 +3,18 @@
 namespace App\Repositories\Eloquent;
 
 use App\Repositories\Presenters\PaginationPresenter;
+use Core\Domain\Exception\NotFoundException;
 use Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\Domain\Entity\Category;
-use App\Models\Category as Model;
+use App\Models\Category as ModelCategory;
 use Core\Domain\Repository\PaginationInterface;
 
 class CategoryEloquentRepository implements CategoryRepositoryInterface
 {
 
-    private Model $model;
+    private ModelCategory $model;
 
-    public function __construct (Model $category)
+    public function __construct (ModelCategory $category)
     {
         $this->model = $category;
     }
@@ -32,38 +33,69 @@ class CategoryEloquentRepository implements CategoryRepositoryInterface
         return $this->toCategory($category);
     }
 
-    public function findAll(string $filter = "", string $order = "DESC"): array
+    public function findAll(string $filter = "", string $order = "desc"): array
     {
-        return [];
+        return $this->model
+            ->when($filter, function ($query, $filter) {
+                return $query->where('name', 'like', "%{$filter}%");
+            })
+            ->orderBy('id', $order)
+            ->get()
+            ->toArray();
     }
 
     public function findById(string $id): Category
     {
-        return new Category();
+        $category = $this->model->find($id);
+
+        if (! $category) {
+            throw new NotFoundException("Category not found");
+        }
+
+
+        return $this->toCategory($category);
     }
 
     public function paginate(string $filter = "", string $order = "DESC", int $page = 1, int $perPage = 15): PaginationInterface
     {
-        return new PaginationPresenter(
-            items: [],
-            total: 0,
-            currentPage: $page,
-            firstPage: 1,
-            lastPage: 1,
-            perPage: $perPage,
-            to: 0,
-            from: 0
-        );
+        $categoriesPaginated = $this->model
+            ->when($filter, function ($query, $filter) {
+                return $query->where('name', 'like', "%{$filter}%");
+            })
+            ->orderBy('id', $order)
+            ->paginate($perPage, ['*'], 'page', $page);
+
+        return new PaginationPresenter($categoriesPaginated);
     }
 
      public function update(Category $category): Category
     {
-        return new Category();
+        $modelCategory = $this->model->find($category->id());
+
+        if (! $modelCategory) {
+            throw new NotFoundException("Category not found");
+        }
+
+        $modelCategory->update(
+            [
+                "name" => $category->name,
+                "description" => $category->description,
+                "is_active" => $category->isActive
+            ]
+        );
+
+        return $this->toCategory($modelCategory->refresh());
     }
 
     public function delete(string $id): bool
     {
-        return false;
+        $category = $this->model->find($id);
+
+        if (! $category) {
+            throw new NotFoundException("Category not found");
+        }
+
+        return $category->delete();
     }
 
     private function toCategory(object $object): Category
