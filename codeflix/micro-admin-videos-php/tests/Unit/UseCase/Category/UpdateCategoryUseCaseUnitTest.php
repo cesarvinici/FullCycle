@@ -2,15 +2,15 @@
 
 namespace Tests\Unit\UseCase\Category;
 
-use App\Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\Domain\Entity\Category;
+use Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\UseCase\Category\DTO\Update\UpdateCategoryInputDto;
 use Core\UseCase\Category\DTO\Update\UpdateCategoryOutputDto;
 use Core\UseCase\Category\UpdateCategoryUseCase;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
-use Unit\UseCase\Category\stdClass;
+use stdClass;
 
 class UpdateCategoryUseCaseUnitTest extends TestCase
 {
@@ -26,6 +26,24 @@ class UpdateCategoryUseCaseUnitTest extends TestCase
         $editedDescription = "Edited Category Description";
         $editedIsValid = false;
 
+        $mockCategoryEntity = Mockery::mock(
+            Category::class,
+            [$id, $editedCategoryName, $editedDescription, $editedIsValid]
+        );
+
+        $mockCategoryEntity->shouldReceive('update');
+        $mockCategoryEntity->shouldReceive("id")->andReturn($id);
+        $mockCategoryEntity->shouldReceive("createdAt")->andReturn(date("Y-m-d H:i:s"));
+
+        $mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
+        $mockRepository->shouldReceive('findById')
+            ->once()
+            ->with($id)
+            ->andReturn($mockCategoryEntity);
+
+
+        $mockRepository->shouldReceive('update')->once()->andReturn($mockCategoryEntity);
+
         $inputDto = Mockery::mock(
             UpdateCategoryInputDto::class,
             [
@@ -36,15 +54,6 @@ class UpdateCategoryUseCaseUnitTest extends TestCase
             ]
         );
 
-        $mockCategory = Mockery::mock(Category::class, [$id, $editedCategoryName, $editedDescription, $editedIsValid]);
-        $mockCategory->shouldReceive("id")->andReturn($id);
-        $mockCategory->shouldReceive("createdAt")->andReturn(date("Y-m-d H:i:s"));
-
-        $mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
-        $mockRepository->shouldReceive('update')
-            ->once()
-            ->with($inputDto)
-            ->andReturn($mockCategory);
 
         $useCase = new UpdateCategoryUseCase($mockRepository);
         $response = $useCase->execute($inputDto);

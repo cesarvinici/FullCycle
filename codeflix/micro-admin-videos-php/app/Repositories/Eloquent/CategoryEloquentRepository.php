@@ -4,9 +4,9 @@ namespace App\Repositories\Eloquent;
 
 use App\Repositories\Presenters\PaginationPresenter;
 use Core\Domain\Exception\NotFoundException;
-use Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\Domain\Entity\Category;
 use App\Models\Category as ModelCategory;
+use Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\Domain\Repository\PaginationInterface;
 
 class CategoryEloquentRepository implements CategoryRepositoryInterface
@@ -56,7 +56,7 @@ class CategoryEloquentRepository implements CategoryRepositoryInterface
         return $this->toCategory($category);
     }
 
-    public function paginate(string $filter = "", string $order = "DESC", int $page = 1, int $perPage = 15): PaginationInterface
+    public function paginate(?string $filter = "", string $order = "DESC", int $page = 1, int $perPage = 15): PaginationInterface
     {
         $categoriesPaginated = $this->model
             ->when($filter, function ($query, $filter) {

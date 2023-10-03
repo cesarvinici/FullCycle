@@ -2,8 +2,8 @@
 
 namespace Core\UseCase\Category;
 
-use App\Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\Domain\Entity\Category;
+use Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\UseCase\Category\DTO\Insert\InsertCategoryInputDto;
 use Core\UseCase\Category\DTO\Insert\InsertCategoryOutputDto;
 use Unit\UseCase\UseCaseInterface;

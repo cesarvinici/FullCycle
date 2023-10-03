@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\UseCase\Category;
 
-use App\Core\Domain\Repository\CategoryRepositoryInterface;
+use Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\Domain\Entity\Category;
 use Core\UseCase\Category\CreateCategoryUseCase;
 use Core\UseCase\Category\DTO\Insert\InsertCategoryInputDto;

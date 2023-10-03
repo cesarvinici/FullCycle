@@ -2,7 +2,7 @@
 
 namespace Core\UseCase\Category;
 
-use App\Core\Domain\Repository\CategoryRepositoryInterface;
+use Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\UseCase\Category\DTO\Delete\DeleteCategoryInputDto;
 use Core\UseCase\Category\DTO\Delete\DeleteCategoryOutputDto;
 

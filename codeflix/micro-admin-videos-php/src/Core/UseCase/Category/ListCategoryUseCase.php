@@ -2,7 +2,7 @@
 
 namespace Core\UseCase\Category;
 
-use App\Core\Domain\Repository\CategoryRepositoryInterface;
+use Core\Domain\Repository\CategoryRepositoryInterface;
 use Core\UseCase\Category\DTO\ListCategory\ListCategoryInputDto;
 use Core\UseCase\Category\DTO\ListCategory\ListCategoryOutputDto;
 
@@ -18,7 +18,6 @@ class ListCategoryUseCase
     public function execute(ListCategoryInputDto $input): ListCategoryOutputDto
     {
         $category = $this->repository->findById($input->id);
-
         return new ListCategoryOutputDto(
             id: $category->id(),
             name: $category->name,
