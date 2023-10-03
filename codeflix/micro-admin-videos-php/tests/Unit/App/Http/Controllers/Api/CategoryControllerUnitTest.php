@@ -35,4 +35,11 @@ class CategoryControllerUnitTest extends TestCase
         $this->assertIsObject($response->resource);
         $this->assertArrayHasKey("meta", $response->additional);
     }
+
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        Mockery::close();
+    }
 }
