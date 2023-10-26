@@ -24,6 +24,7 @@ class ListCategoryUseCase
             description: $category->description,
             is_active: $category->isActive,
             created_at: $category->createdAt(),
+            updated_at: $category->updatedAt(),
         );
     }
 }

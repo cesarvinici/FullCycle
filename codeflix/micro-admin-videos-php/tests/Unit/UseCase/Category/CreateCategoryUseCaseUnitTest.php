@@ -24,6 +24,7 @@ class CreateCategoryUseCaseUnitTest extends TestCase
         $mockCategory = Mockery::mock(Category::class, [$uuid, $categoryName, $description, $isValid]);
         $mockCategory->shouldReceive("id")->andReturn($uuid);
         $mockCategory->shouldReceive("createdAt")->andReturn(date("Y-m-d H:i:s"));
+        $mockCategory->shouldReceive("updatedAt")->andReturn(date("Y-m-d H:i:s"));
 
         $mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
         $mockRepository->shouldReceive('insert')->once()->andReturn($mockCategory);

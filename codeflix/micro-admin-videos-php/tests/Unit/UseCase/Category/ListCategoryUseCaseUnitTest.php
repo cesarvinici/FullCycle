@@ -24,6 +24,7 @@ class ListCategoryUseCaseUnitTest extends TestCase
         $mockCategory = Mockery::mock(Category::class, [$id, $categoryName, $description, $isValid]);
         $mockCategory->shouldReceive("id")->andReturn($id);
         $mockCategory->shouldReceive("createdAt")->andReturn(date("Y-m-d H:i:s"));
+        $mockCategory->shouldReceive("updatedAt")->andReturn(date("Y-m-d H:i:s"));
 
         $inputDto = Mockery::mock(ListCategoryInputDto::class, [$id]);
 

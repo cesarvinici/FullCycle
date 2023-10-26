@@ -57,7 +57,7 @@ class CategoryController extends Controller
 
         return response()
             ->json(
-                new CategoryResource(collect($response)),
+                new CategoryResource($response),
                 JsonResponse::HTTP_CREATED
             );
     }
@@ -72,7 +72,7 @@ class CategoryController extends Controller
 
         return response()
             ->json(
-                new CategoryResource(collect($response)),
+                new CategoryResource($response),
                 JsonResponse::HTTP_OK
             );
     }
@@ -90,7 +90,7 @@ class CategoryController extends Controller
 
         return response()
             ->json(
-                new CategoryResource(collect($response)),
+                new CategoryResource($response),
                 JsonResponse::HTTP_OK
             );
     }
