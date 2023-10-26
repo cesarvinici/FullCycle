@@ -4,13 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use Core\UseCase\Category\CreateCategoryUseCase;
+use Core\UseCase\Category\DeleteCategoryUseCase;
+use Core\UseCase\Category\DTO\Delete\DeleteCategoryInputDto;
 use Core\UseCase\Category\DTO\Insert\InsertCategoryInputDto;
 use Core\UseCase\Category\DTO\ListCategories\ListCategoriesInputDto;
 use Core\UseCase\Category\DTO\ListCategory\ListCategoryInputDto;
+use Core\UseCase\Category\DTO\Update\UpdateCategoryInputDto;
 use Core\UseCase\Category\ListCategoriesUseCase;
 use Core\UseCase\Category\ListCategoryUseCase;
+use Core\UseCase\Category\UpdateCategoryUseCase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -70,5 +75,34 @@ class CategoryController extends Controller
                 new CategoryResource(collect($response)),
                 JsonResponse::HTTP_OK
             );
+    }
+
+    public function update(UpdateCategoryRequest $request, string $id, UpdateCategoryUseCase $useCase)
+    {
+        $response = $useCase->execute(
+            input: new UpdateCategoryInputDto(
+                id: $id,
+                name: $request->input('name'),
+                description: $request->input('description', ""),
+                is_active: (bool) $request->input('isActive', true),
+            )
+        );
+
+        return response()
+            ->json(
+                new CategoryResource(collect($response)),
+                JsonResponse::HTTP_OK
+            );
+    }
+
+    public function destroy(string $id, DeleteCategoryUseCase $useCase)
+    {
+        $useCase->execute(
+            new DeleteCategoryInputDto(
+                id: $id
+            )
+        );
+
+        return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
     }
 }
