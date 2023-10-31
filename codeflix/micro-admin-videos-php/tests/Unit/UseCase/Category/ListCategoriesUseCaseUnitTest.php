@@ -15,16 +15,13 @@ use stdClass;
 class ListCategoriesUseCaseUnitTest extends TestCase
 {
 
-
     public function testListCategories()
     {
-
         $item = new stdClass();
         $item->id = "1";
         $item->name = "Category Name";
         $item->description = "Category Description";
         $item->is_active = true;
-
 
         $mockPaginate = $this->mockPagination([$item]);
 
