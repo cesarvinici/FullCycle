@@ -31,10 +31,12 @@ class CreateGenreUseCase
 
        try {
 
+           $this->validateCategoriesId($inputDto->categoriesId);
+
            $entity = new Genre(
                name: $inputDto->name,
                isActive: $inputDto->is_active,
-               categoriesId: $this->validateCategoriesId($inputDto->categoriesId)
+               categoriesId: $inputDto->categoriesId
            );
 
            $response = $this->repository->insert($entity);
@@ -54,13 +56,12 @@ class CreateGenreUseCase
        }
     }
 
-    public function validateCategoriesId(array $categoriesIdsList)
+    public function validateCategoriesId(array $categoriesIdsList): void
     {
 
         if (count($categoriesIdsList) === 0) {
             throw new NotFoundException("You must specify a category");
         }
-
 
         $categoriesInDatabase = $this->categoryRepository->getCategoriesIds($categoriesIdsList);
 
@@ -70,9 +71,6 @@ class CreateGenreUseCase
             $categoriesNotFound = implode(",", $missingCategories);
             throw new NotFoundException("Categories not found: {$categoriesNotFound}");
         }
-
-        return $categoriesIdsList;
-
     }
 
 }

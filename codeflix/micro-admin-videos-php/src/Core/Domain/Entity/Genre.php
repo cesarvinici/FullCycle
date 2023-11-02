@@ -44,7 +44,10 @@ class Genre
 
     public function addCategory(string $categoryId): void
     {
-        $this->categoriesId[] = $categoryId;
+        if (! in_array($categoryId, $this->categoriesId))
+        {
+            $this->categoriesId[] = $categoryId;
+        }
     }
 
     public function removeCategory(string $categoryToBeRemoved): void
