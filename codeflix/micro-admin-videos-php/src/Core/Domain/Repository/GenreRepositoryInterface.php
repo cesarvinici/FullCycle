@@ -3,7 +3,6 @@
 
 namespace Core\Domain\Repository;
 
-use Core\Domain\Entity\Category;
 use Core\Domain\Entity\Genre;
 use Core\Domain\Repository\PaginationInterface;
 
