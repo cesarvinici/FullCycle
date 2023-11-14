@@ -6,17 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Genre extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = [
-      "id",
-      "name",
-      "description",
-      "is_active"
-    ];
+    protected $fillable = ['id', 'name', 'is_active', 'created_at'];
 
     public $incrementing = false;
 
@@ -25,8 +20,8 @@ class Category extends Model
         "is_active" => "boolean"
     ];
 
-    public function genres()
+    public function categories()
     {
-        $this->belongsToMany(Genre::class);
+        $this->belongsToMany(Category::class);
     }
 }
