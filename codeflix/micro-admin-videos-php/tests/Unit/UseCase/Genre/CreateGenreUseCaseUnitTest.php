@@ -41,13 +41,10 @@ class CreateGenreUseCaseUnitTest extends TestCase
 
         $mockEntity = Mockery::mock(
             Genre::class,
-            ["Genre Name", $this->genreUuid, true, []]
+            ["Genre Name", $this->genreUuid, true, [$this->categoryUuid]]
         );
 
         $mockEntity->shouldReceive("id")->andReturn($this->genreUuid);
-        $mockEntity->shouldReceive("name")->andReturn("Genre Name");
-        $mockEntity->shouldReceive("isActive")->andReturn(true);
-        $mockEntity->shouldReceive("categoriesId")->andReturn([$this->categoryUuid]);
         $mockEntity->shouldReceive("createdAt")->andReturn(date("Y-m-d H:i:s"));
 
         $this->mockCategoryRepository->shouldReceive('getCategoriesIds')

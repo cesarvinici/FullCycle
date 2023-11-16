@@ -47,7 +47,6 @@ class UpdateGenreUseCaseUnitTest extends TestCase
         $mockEntity->shouldReceive("deactivate")->once();
         $mockEntity->shouldReceive("activate")->never();
         $mockEntity->shouldReceive("addCategory")->twice();
-        $mockEntity->shouldReceive("categoriesId")->once()->andReturn([$this->categoryUuid]);
 
         $anotherCategoryUuid = (string) Uuid::uuid4();
 
@@ -57,16 +56,13 @@ class UpdateGenreUseCaseUnitTest extends TestCase
         );
 
         $mockEntityEdited->shouldReceive("id")->andReturn($this->genreUuid);
-        $mockEntityEdited->shouldReceive("name")->andReturn("Genre Name Edited");
-        $mockEntityEdited->shouldReceive("isActive")->andReturn(false);
-        $mockEntityEdited->shouldReceive("categoriesId")->andReturn([$this->categoryUuid, $anotherCategoryUuid]);
         $mockEntityEdited->shouldReceive("createdAt")->andReturn(date("Y-m-d H:i:s"));
 
         $this->mockCategoryRepository->shouldReceive('getCategoriesIds')
             ->once()
             ->andReturn([$this->categoryUuid, $anotherCategoryUuid]);
 
-        $this->mockGenreRepository->shouldReceive('getById')
+        $this->mockGenreRepository->shouldReceive('findById')
             ->once()
             ->andReturn($mockEntity);
 
@@ -93,7 +89,7 @@ class UpdateGenreUseCaseUnitTest extends TestCase
         $this->mockTransaction->shouldReceive('rollback')->never();
 
         $useCase = new UpdateGenreUseCase($this->mockGenreRepository, $this->mockTransaction, $this->mockCategoryRepository);
-        $response = $useCase->execute($mockInputDto, );
+        $response = $useCase->execute($mockInputDto);
 
         $this->assertInstanceOf(UpdateGenreOutputDto::class, $response);
         $this->assertEquals($mockOutputDto->id, $response->id);
@@ -108,14 +104,13 @@ class UpdateGenreUseCaseUnitTest extends TestCase
     {
         $mockEntity = Mockery::mock(
             Genre::class,
-            ["Genre Name", $this->genreUuid, true, []]
+            ["Genre Name", $this->genreUuid, true, [$this->categoryUuid]]
         );
 
         $mockEntity->shouldReceive("update")->once();
         $mockEntity->shouldReceive("deactivate")->once();
         $mockEntity->shouldReceive("activate")->never();
         $mockEntity->shouldReceive("addCategory")->once();
-        $mockEntity->shouldReceive("categoriesId")->once()->andReturn([$this->categoryUuid]);
         $mockEntity->shouldReceive("removeCategory")->once()->with($this->categoryUuid);
 
         $anotherCategoryUuid = (string) Uuid::uuid4();
@@ -135,7 +130,7 @@ class UpdateGenreUseCaseUnitTest extends TestCase
             ->once()
             ->andReturn([$this->categoryUuid, $anotherCategoryUuid]);
 
-        $this->mockGenreRepository->shouldReceive('getById')
+        $this->mockGenreRepository->shouldReceive('findById')
             ->once()
             ->andReturn($mockEntity);
 
@@ -184,7 +179,7 @@ class UpdateGenreUseCaseUnitTest extends TestCase
             ->once()
             ->andReturn([]);
 
-        $this->mockGenreRepository->shouldReceive('getById')
+        $this->mockGenreRepository->shouldReceive('findById')
             ->once()
             ->andReturn($mockEntity);
 

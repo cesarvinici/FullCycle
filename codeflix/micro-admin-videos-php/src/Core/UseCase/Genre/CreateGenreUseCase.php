@@ -30,7 +30,6 @@ class CreateGenreUseCase
     {
 
        try {
-
            $this->validateCategoriesId($inputDto->categoriesId);
 
            $entity = new Genre(
@@ -45,9 +44,9 @@ class CreateGenreUseCase
 
            return new CreateGenreOutputDto(
                id: $response->id(),
-               name: $response->name(),
-               is_active: $response->isActive(),
-               categoriesId: $response->categoriesId(),
+               name: $response->name,
+               is_active: $response->isActive,
+               categoriesId: $response->categoriesId,
                created_at: $response->createdAt()
            );
        } catch (\Throwable $th) {
@@ -72,5 +71,4 @@ class CreateGenreUseCase
             throw new NotFoundException("Categories not found: {$categoriesNotFound}");
         }
     }
-
 }

@@ -23,9 +23,6 @@ class ListGenreUseCaseUnitTest extends TestCase
         );
 
         $mockEntity->shouldReceive("id")->andReturn($uuid);
-        $mockEntity->shouldReceive("name")->andReturn("Genre Name");
-        $mockEntity->shouldReceive("isActive")->andReturn(true);
-        $mockEntity->shouldReceive("categoriesId")->andReturn([]);
         $mockEntity->shouldReceive("createdAt")->andReturn(date("Y-m-d H:i:s"));
 
         $mockRepository = Mockery::mock(\stdClass::class, GenreRepositoryInterface::class);

@@ -24,7 +24,7 @@ class UpdateGenreUseCase
 
     public function execute(UpdateGenreInputDto $input): UpdateGenreOutputDto
     {
-        $genre = $this->repository->getById($input->id);
+        $genre = $this->repository->findById($input->id);
 
         try {
 
@@ -37,7 +37,7 @@ class UpdateGenreUseCase
             $input->is_active ? $genre->activate() : $genre->deactivate();
 
             $categoriesToBeRemoved = array_filter(
-                $genre->categoriesId(),
+                $genre->categoriesId,
                 fn ($categoryId) => ! in_array($categoryId, $input->categoriesId)
             );
 
@@ -50,9 +50,9 @@ class UpdateGenreUseCase
 
             return new UpdateGenreOutputDto(
                 id: $response->id(),
-                name: $response->name(),
-                is_active: $response->isActive(),
-                categoriesId: $response->categoriesId(),
+                name: $response->name,
+                is_active: $response->isActive,
+                categoriesId: $response->categoriesId,
                 created_at: $response->createdAt()
             );
         } catch (\Throwable $th) {

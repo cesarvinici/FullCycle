@@ -31,7 +31,6 @@ class ListGenresUseCase
             $response->firstPage(),
             $response->lastPage(),
             $response->perPage(),
-            $response->lastPage(),
             $response->to(),
             $response->from(),
         );

@@ -12,7 +12,6 @@ class ListGenreUseCase
 
     public function __construct(GenreRepositoryInterface $repository)
     {
-
         $this->repository = $repository;
     }
 
@@ -22,9 +21,9 @@ class ListGenreUseCase
 
         return new ListGenreOutputDto(
             id: $response->id(),
-            name: $response->name(),
-            is_active: $response->isActive(),
-            categoriesId: $response->categoriesId(),
+            name: $response->name,
+            is_active: $response->isActive,
+            categoriesId: $response->categoriesId,
             created_at: $response->createdAt()
         );
     }
