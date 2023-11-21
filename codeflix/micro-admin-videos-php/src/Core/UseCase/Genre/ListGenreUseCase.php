@@ -24,7 +24,8 @@ class ListGenreUseCase
             name: $response->name,
             is_active: $response->isActive,
             categoriesId: $response->categoriesId,
-            created_at: $response->createdAt()
+            created_at: $response->createdAt(),
+            updated_at: $response->updatedAt()
         );
     }
 }

@@ -3,7 +3,6 @@
 namespace Tests\Feature\Api;
 
 use App\Models\Category;
-use App\Repositories\Eloquent\CategoryEloquentRepository;
 use Core\Domain\Repository\CategoryRepositoryInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -12,14 +11,11 @@ use Tests\TestCase;
 
 class CategoryApiTest extends TestCase
 {
-    private CategoryRepositoryInterface $repository;
     private $endpoint = "/api/categories";
 
     protected function setUp(): void
     {
         parent::setUp();
-        $model = new Category();
-        $this->repository = new CategoryEloquentRepository($model);
     }
 
     public function testListEmptyCategories()

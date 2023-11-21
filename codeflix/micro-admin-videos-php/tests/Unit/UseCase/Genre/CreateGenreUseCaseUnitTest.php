@@ -46,6 +46,7 @@ class CreateGenreUseCaseUnitTest extends TestCase
 
         $mockEntity->shouldReceive("id")->andReturn($this->genreUuid);
         $mockEntity->shouldReceive("createdAt")->andReturn(date("Y-m-d H:i:s"));
+        $mockEntity->shouldReceive("updatedAt")->andReturn(date("Y-m-d H:i:s"));
 
         $this->mockCategoryRepository->shouldReceive('getCategoriesIds')
             ->once()
@@ -66,7 +67,8 @@ class CreateGenreUseCaseUnitTest extends TestCase
             "Genre Name",
             true,
             [$this->categoryUuid],
-            date("Y-m-d H:i:s")
+            date("Y-m-d H:i:s"),
+            date("Y-m-d H:i:s"),
         ]);
 
         $this->mockTransaction->shouldReceive('commit')->once()->andReturn(true);

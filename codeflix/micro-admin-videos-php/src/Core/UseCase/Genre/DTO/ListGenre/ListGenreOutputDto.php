@@ -9,6 +9,7 @@ class ListGenreOutputDto
         public string $name,
         public bool $is_active,
         public array $categoriesId,
-        public string $created_at
+        public string $created_at,
+        public string $updated_at,
     ) { }
 }

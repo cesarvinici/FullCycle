@@ -57,6 +57,7 @@ class UpdateGenreUseCaseUnitTest extends TestCase
 
         $mockEntityEdited->shouldReceive("id")->andReturn($this->genreUuid);
         $mockEntityEdited->shouldReceive("createdAt")->andReturn(date("Y-m-d H:i:s"));
+        $mockEntityEdited->shouldReceive("updatedAt")->andReturn("Genre Name Edited");
 
         $this->mockCategoryRepository->shouldReceive('getCategoriesIds')
             ->once()
@@ -82,6 +83,7 @@ class UpdateGenreUseCaseUnitTest extends TestCase
             "Genre Name Edited",
             false,
             [$this->categoryUuid, $anotherCategoryUuid],
+            date("Y-m-d H:i:s"),
             date("Y-m-d H:i:s")
         ]);
 
@@ -125,6 +127,7 @@ class UpdateGenreUseCaseUnitTest extends TestCase
         $mockEntityEdited->shouldReceive("isActive")->andReturn(false);
         $mockEntityEdited->shouldReceive("categoriesId")->andReturn([$anotherCategoryUuid]);
         $mockEntityEdited->shouldReceive("createdAt")->andReturn(date("Y-m-d H:i:s"));
+        $mockEntityEdited->shouldReceive("updatedAt")->andReturn(date("Y-m-d H:i:s"));
 
         $this->mockCategoryRepository->shouldReceive('getCategoriesIds')
             ->once()
@@ -150,6 +153,7 @@ class UpdateGenreUseCaseUnitTest extends TestCase
             "Genre Name Edited",
             false,
             [$anotherCategoryUuid],
+            date("Y-m-d H:i:s"),
             date("Y-m-d H:i:s")
         ]);
 

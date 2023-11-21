@@ -10,6 +10,7 @@ class UpdateGenreOutputDto
         public bool $is_active,
         public array $categoriesId,
         public string $created_at,
+        public string $updated_at,
     )
     { }
 }
