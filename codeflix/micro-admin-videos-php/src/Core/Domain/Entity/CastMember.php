@@ -15,12 +15,12 @@ class CastMember
     public function __construct(
         protected string $name,
         protected CastMemberType $type = CastMemberType::ACTOR,
-        protected ?Uuid $id = null,
+        protected Uuid|string $id = "",
         protected ?Datetime $createdAt = null,
         protected ?Datetime $updatedAt = null,
     )
     {
-        $this->id = $id ?? Uuid::random();
+        $this->id = $id === "" ? Uuid::random() : $id;
         $this->createdAt = $createdAt ?? new Datetime();
         $this->updatedAt = $updatedAt ?? new Datetime();
 
