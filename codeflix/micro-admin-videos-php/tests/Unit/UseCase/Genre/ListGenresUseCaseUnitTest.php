@@ -11,9 +11,12 @@ use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use Mockery;
 use stdClass;
+use Tests\Traits\MockPaginationTrait;
 
 class ListGenresUseCaseUnitTest extends TestCase
 {
+    use MockPaginationTrait;
+
     public function testUseCase()
     {
         $item = new stdClass();
@@ -50,20 +53,4 @@ class ListGenresUseCaseUnitTest extends TestCase
         parent::tearDown();
         Mockery::close();
     }
-
-    protected function mockPagination(array $items = []): MockInterface
-    {
-        $mockPaginate = Mockery::mock(stdClass::class, PaginationInterface::class);
-        $mockPaginate->shouldReceive('items')->andReturn($items);
-        $mockPaginate->shouldReceive('total')->andReturn(count($items));
-        $mockPaginate->shouldReceive('currentPage')->andReturn(1);
-        $mockPaginate->shouldReceive('firstPage')->andReturn(1);
-        $mockPaginate->shouldReceive('lastPage')->andReturn(1);
-        $mockPaginate->shouldReceive('perPage')->andReturn(15);
-        $mockPaginate->shouldReceive('to')->andReturn(0);
-        $mockPaginate->shouldReceive('from')->andReturn(0);
-
-        return $mockPaginate;
-    }
-
 }

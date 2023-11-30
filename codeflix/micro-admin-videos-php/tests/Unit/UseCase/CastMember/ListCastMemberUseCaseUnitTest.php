@@ -16,6 +16,8 @@ use Mockery;
 
 class ListCastMemberUseCaseUnitTest extends TestCase
 {
+    private $mockCastMemberRepository;
+
     protected function setUp(): void
     {
         parent::setUp();
