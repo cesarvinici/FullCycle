@@ -21,7 +21,7 @@ class CreateCastMemberUseCase
     {
         $entity = new CastMember (
             name: $inputDto->name,
-            type: $inputDto->type === 1 ? CastMemberType::DIRECTOR : CastMemberType::ACTOR
+            type: CastMemberType::from($inputDto->type)
         );
 
         $response = $this->repository->insert($entity);
