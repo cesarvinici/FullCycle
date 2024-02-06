@@ -70,8 +70,8 @@ class CreateCastMemberUseCaseUnitTest extends TestCase
         $this->assertEquals("Cast Member Name", $response->name);
         $this->assertEquals(1, $response->type);
         $this->assertEquals($uuid, $response->id);
-        $this->assertNotNull($response->createdAt);
-        $this->assertNotNull($response->updatedAt);
+        $this->assertNotNull($response->created_at);
+        $this->assertNotNull($response->updated_at);
     }
 
 }

@@ -30,8 +30,8 @@ class CreateCastMemberUseCase
             id: $response->id(),
             name: $response->name,
             type: $response->type->value,
-            createdAt: $response->createdAt(),
-            updatedAt: $response->updatedAt()
+            created_at: $response->createdAt(),
+            updated_at: $response->updatedAt()
         );
     }
 }

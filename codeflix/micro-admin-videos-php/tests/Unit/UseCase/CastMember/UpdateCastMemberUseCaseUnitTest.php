@@ -59,8 +59,8 @@ class UpdateCastMemberUseCaseUnitTest extends TestCase
         $this->assertEquals($id, $response->id);
         $this->assertEquals($editedCastMemberName, $response->name);
         $this->assertEquals($editedType->value, $response->type);
-        $this->assertEquals($mockCastMemberEntity->createdAt(), $response->createdAt);
-        $this->assertEquals($mockCastMemberEntity->updatedAt(), $response->updatedAt);
+        $this->assertEquals($mockCastMemberEntity->createdAt(), $response->created_at);
+        $this->assertEquals($mockCastMemberEntity->updatedAt(), $response->updated_at);
     }
 
 

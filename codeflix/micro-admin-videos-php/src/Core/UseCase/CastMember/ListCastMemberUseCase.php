@@ -28,8 +28,8 @@ class ListCastMemberUseCase
             id: $castMember->id(),
             name: $castMember->name,
             type: $castMember->type->value,
-            createdAt: $castMember->createdAt(),
-            updatedAt: $castMember->updatedAt()
+            created_at: $castMember->createdAt(),
+            updated_at: $castMember->updatedAt()
         );
     }
 }
