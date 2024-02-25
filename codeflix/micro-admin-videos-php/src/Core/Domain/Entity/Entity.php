@@ -6,7 +6,7 @@ use Core\Domain\Notification\Notification;
 
 abstract class Entity
 {
-    protected Notification $notification;
+    public Notification $notification;
 
     public function __construct()
     {
