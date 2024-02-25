@@ -6,6 +6,7 @@ use Core\Domain\Entity\Genre;
 use Core\Domain\Entity\Video;
 use Core\Domain\Enum\MediaStatus;
 use Core\Domain\Enum\Rating;
+use Core\Domain\Exception\EntityValidationException;
 use Core\Domain\ValueObject\Image;
 use Core\Domain\ValueObject\Media;
 use Core\Domain\ValueObject\Uuid;
@@ -285,5 +286,20 @@ class VideoUnitTest extends TestCase
         $this->assertEquals('file-path', $entity->videoFile()->path);
         $this->assertEquals(MediaStatus::PROCESSING->value, $entity->videoFile()->status->value);
         $this->assertEquals('encoded-path', $entity->videoFile()->encodedPath);
+    }
+
+    public function testValidation()
+    {
+
+        $this->expectException(EntityValidationException::class);
+
+        new Video(
+            title: 'Ge',
+            description: 'Vi',
+            yearLaunched: 2021,
+            duration: 90,
+            opened: true,
+            rating: Rating::ER
+        );
     }
 }

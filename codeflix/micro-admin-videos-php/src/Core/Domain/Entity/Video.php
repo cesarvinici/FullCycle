@@ -4,6 +4,7 @@ namespace Core\Domain\Entity;
 
 use Core\Domain\Entity\Traits\MagicMethodsTrait;
 use Core\Domain\Enum\Rating;
+use Core\Domain\Validation\DomainValidation;
 use Core\Domain\ValueObject\Image;
 use Core\Domain\ValueObject\Media;
 use Core\Domain\ValueObject\Uuid;
@@ -38,6 +39,8 @@ class Video
         $this->id = $id === "" ? Uuid::random() : $id;
         $this->createdAt = $createdAt ?? new Datetime();
         $this->updatedAt = $updatedAt ?? new Datetime();
+
+        $this->validation();
     }
 
     public function addCategory(string $categoryId): void
@@ -46,6 +49,13 @@ class Video
         {
             $this->categoriesId[] = $categoryId;
         }
+    }
+
+    protected function validation() {
+        DomainValidation::strMinLength($this->title, 3, "Title must have at least 3 character");
+        DomainValidation::strMinLength($this->description, 2, "Description must have at least 3 character");
+        DomainValidation::strMaxLength($this->title, 255, "Title must have at most 255 character");
+        DomainValidation::strMaxLength($this->description, 500, "Title must have at most 500 character");
     }
 
     public function removeCategory(string $categoryId): void
