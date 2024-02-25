@@ -4,13 +4,18 @@ namespace Core\Domain\Entity;
 
 use Core\Domain\Entity\Traits\MagicMethodsTrait;
 use Core\Domain\Enum\Rating;
+use Core\Domain\Exception\EntityValidationException;
+use Core\Domain\Factory\VideoValidatorFactory;
+use Core\Domain\Notification\Notification;
+use Core\Domain\Notification\NotificationException;
 use Core\Domain\Validation\DomainValidation;
+use Core\Domain\Validation\VideoLaravelValidator;
 use Core\Domain\ValueObject\Image;
 use Core\Domain\ValueObject\Media;
 use Core\Domain\ValueObject\Uuid;
 use Datetime;
 
-class Video
+class Video extends Entity
 {
     use MagicMethodsTrait;
 
@@ -36,11 +41,14 @@ class Video
         protected Datetime|null $createdAt = null,
         protected Datetime|null $updatedAt = null,
     ) {
+
+        parent::__construct();
+
         $this->id = $id === "" ? Uuid::random() : $id;
         $this->createdAt = $createdAt ?? new Datetime();
         $this->updatedAt = $updatedAt ?? new Datetime();
 
-        $this->validation();
+        $this->validate();
     }
 
     public function addCategory(string $categoryId): void
@@ -51,11 +59,14 @@ class Video
         }
     }
 
-    protected function validation() {
-        DomainValidation::strMinLength($this->title, 3, "Title must have at least 3 character");
-        DomainValidation::strMinLength($this->description, 2, "Description must have at least 3 character");
-        DomainValidation::strMaxLength($this->title, 255, "Title must have at most 255 character");
-        DomainValidation::strMaxLength($this->description, 500, "Title must have at most 500 character");
+    protected function validate() {
+
+        VideoValidatorFactory::create()
+            ->validate($this);
+
+        if ($this->notification->hasErrors()) {
+            throw new NotificationException($this->notification->messages('video'));
+        }
     }
 
     public function removeCategory(string $categoryId): void

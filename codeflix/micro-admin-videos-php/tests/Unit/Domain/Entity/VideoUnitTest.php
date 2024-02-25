@@ -7,6 +7,7 @@ use Core\Domain\Entity\Video;
 use Core\Domain\Enum\MediaStatus;
 use Core\Domain\Enum\Rating;
 use Core\Domain\Exception\EntityValidationException;
+use Core\Domain\Notification\NotificationException;
 use Core\Domain\ValueObject\Image;
 use Core\Domain\ValueObject\Media;
 use Core\Domain\ValueObject\Uuid;
@@ -288,14 +289,14 @@ class VideoUnitTest extends TestCase
         $this->assertEquals('encoded-path', $entity->videoFile()->encodedPath);
     }
 
-    public function testValidation()
+    public function testException()
     {
-
-        $this->expectException(EntityValidationException::class);
+        $this->expectException(NotificationException::class);
+        $this->expectExceptionMessage("video: The title must be at least 3 characters.\nvideo: The description field is required.");
 
         new Video(
             title: 'Ge',
-            description: 'Vi',
+            description: '',
             yearLaunched: 2021,
             duration: 90,
             opened: true,
